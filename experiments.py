@@ -4,3 +4,4 @@ import spelling
 
 print(chord.intToText(chord.toInt("Bb", "G", "dominant")))
 print(chord.intToText(chord.textToInt("Dm7(b5)/G")))
+print(chord.intToText(24))

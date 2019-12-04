@@ -126,3 +126,6 @@ ACC_MAP = { val: key for key, val in ALT_MAP.items() }
 
 def alt2acc(alt):
     return ALT_MAP[alt]
+
+def isValid(a, b, c):
+    return a in KIND_TEXT_MAP and b in STEP_MAP and c in STEP_MAP

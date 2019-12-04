@@ -35,13 +35,16 @@ def toInt(root, bass, kind):
 # [5 root bits][5 bass bits][5 kind bits]
 def fromInt(number):
     if number == NO_CHORD:
-        return "", "", ""
+        return "N.", "N.", "C."
 
     kindi = number % (1 << KIND_BITS) # get kind bits
     number >>= KIND_BITS # shift right to get bass bits
     bassi = number % (1 << BASS_BITS) + spelling.TPC_MIN
     number >>= BASS_BITS # shift right to get to root bits
     rooti = number + spelling.TPC_MIN
+
+    if not spelling.isValid(kindi, bassi, rooti):
+        return "N.", "N.", "C."
 
     # convert int values back to strings
     kind = spelling.int2kindText(kindi)
@@ -52,8 +55,6 @@ def fromInt(number):
 
 # Turn int representation back into chord text
 def intToText(number):
-    if number == NO_CHORD:
-        return "N.C."
     r, b, k = fromInt(number)
     if r == b:
         return r + k
