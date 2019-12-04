@@ -9,6 +9,7 @@ KIND_BITS = 5 # 24
 NO_CHORD = -1 # Number representing no chord/end of piece
 
 # Parse and convert chord to integer representation
+# [5 root bits][5 bass bits][5 kind bits]
 def toInt(root, bass, kind):
     # First parse the chord
     out = -1
@@ -30,9 +31,30 @@ def toInt(root, bass, kind):
     return out
 
 # Turn int representation back into root, bass, kind, and extension
+# [5 root bits][5 bass bits][5 kind bits]
 def fromInt(number):
-    pass
+    if number == NO_CHORD:
+        return "", "", ""
+
+    kindi = number % (1 << KIND_BITS) # get kind bits
+    number >>= KIND_BITS # shift right to get bass bits
+    bassi = number % (1 << BASS_BITS) + spelling.TPC_MIN
+    number >>= BASS_BITS # shift right to get to root bits
+    rooti = number + spelling.TPC_MIN
+
+    # convert int values back to strings
+    kind = spelling.int2kindText(kindi)
+    bass = spelling.tpc2step(bassi)
+    root = spelling.tpc2step(rooti)
+    
+    return root, bass, kind
 
 # Turn int representation back into chord text
-def intToChord(number):
-    pass
+def intToText(number):
+    if number == NO_CHORD:
+        return "N.C."
+    r, b, k = fromInt(number)
+    if r == b:
+        return r + k
+    else:
+        return r + k + "/" + b

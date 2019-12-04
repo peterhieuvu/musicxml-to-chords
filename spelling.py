@@ -28,7 +28,7 @@ TPC_MAX = 13
 
 # Mapping between the kind of a chord and a number representation
 #
-# This mapping is based off of musicxml <kind> tags which means
+# This mapping is based off of Fmusicxml <kind> tags which means
 # we can use that to reduce all of the different qualities and extensions down
 # to one string. (ex. m, min, - all reduce to <kind>minor</kind>)
 KIND_MAP =  {
@@ -61,35 +61,59 @@ KIND_MAP =  {
 def kind2int(kind):
     return KIND_MAP[kind]
 
-TEXT_MAP = {
-    0: 'major',
-    1: 'minor', 
-    2: 'half-diminished',
-    3: 'diminished',
-    4: 'augmented',
-    5: 'major-seventh', 
-    6: 'minor-seventh', 
-    7: 'dominant',
-    8: 'major-ninth', 
-    9: 'minor-ninth', 
-    10: 'dominant-ninth',
-    11: 'minor-11th',
-    12: 'dominant-11th',
-    13: 'minor-13th',
-    14: 'minor-sixth',
-    15: 'major-13th',
-    16: 'dominant-13th',
-    17: 'dominant-alt',
-    18: 'suspended-fourth',
-    19: 'augmented-seventh',
-    20: 'major-sixth',
-    21: 'major-minor',
-    22: 'power',
+KIND_TEXT_MAP = {
+#    0: 'major',
+#    1: 'minor', 
+#    2: 'half-diminished',
+#    3: 'diminished',
+#    4: 'augmented',
+#    5: 'major-seventh', 
+#    6: 'minor-seventh', 
+#    7: 'dominant',
+#    8: 'major-ninth', 
+#    9: 'minor-ninth', 
+#    10: 'dominant-ninth',
+#    11: 'minor-11th',
+#    12: 'dominant-11th',
+#    13: 'minor-13th',
+#    14: 'minor-sixth',
+#    15: 'major-13th',
+#    16: 'dominant-13th',
+#    17: 'dominant-alt',
+#    18: 'suspended-fourth',
+#    19: 'augmented-seventh',
+#    20: 'major-sixth',
+#    21: 'major-minor',
+#    22: 'power',
+#    23: 'alt'
+    0: '',
+    1: 'm', 
+    2: 'm7(b5)',
+    3: 'dim',
+    4: 'aug',
+    5: 'maj7', 
+    6: 'm7', 
+    7: '7',
+    8: 'maj9', 
+    9: 'm9', 
+    10: '9',
+    11: 'm11',
+    12: '11',
+    13: 'm13',
+    14: 'm6',
+    15: 'maj13',
+    16: '13',
+    17: '7alt',
+    18: 'sus4',
+    19: '+7',
+    20: '6',
+    21: 'm(maj7)',
+    22: '5',
     23: 'alt'
 }
 
-def int2text(num):
-    return TEXT_MAP[num]
+def int2kindText(num):
+    return KIND_TEXT_MAP[num]
 
 def key2step(key):
     return tpc2step(key - 1) # tpc is centered around F while key is centered around C
