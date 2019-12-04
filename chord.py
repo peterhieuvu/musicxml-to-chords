@@ -58,3 +58,18 @@ def intToText(number):
         return r + k
     else:
         return r + k + "/" + b
+
+# Turn chord text into int representation
+def textToInt(text):
+    root = text[0]
+    if len(text) == 1: return toInt(root, root, "major")
+
+    alter = ''
+    kidx = 1
+    if text[1] in spelling.ACC_MAP:
+        alter = text[0]
+        kidx = 2
+    
+    slashidx = text.find('/')
+    if slashidx == -1: return toInt(root + alter, root + alter, spelling.KIND_REV_MAP[text[kidx:]])
+    else: return toInt(root + alter, text[slashidx+1:], spelling.KIND_REV_MAP[text[kidx:slashidx]])

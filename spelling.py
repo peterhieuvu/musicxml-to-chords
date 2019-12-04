@@ -112,6 +112,8 @@ KIND_TEXT_MAP = {
     23: 'alt'
 }
 
+KIND_REV_MAP = { valt: valk for k1, valt in KIND_TEXT_MAP.items() for valk, k2 in KIND_MAP.items() if k1 == k2 }
+
 def int2kindText(num):
     return KIND_TEXT_MAP[num]
 
@@ -119,6 +121,8 @@ def key2step(key):
     return tpc2step(key - 1) # tpc is centered around F while key is centered around C
 
 ALT_MAP = { -2 : 'bb', -1 : 'b', 0 : '', 1 : '#', 2 : '##' }
+
+ACC_MAP = { val: key for key, val in ALT_MAP.items() }
 
 def alt2acc(alt):
     return ALT_MAP[alt]
