@@ -5,11 +5,11 @@
 # This tonal pitch class is a representation of different notes
 # given their relationship between one another
 TPC_MAP = {
-    'Fbb' : -14, 'Cbb' : -13, 'Gbb' : -12, 'Dbb' : -11, 'Abb' : -10, 'Ebb' : -9, 'Bbb' : -8, 
+    #'Fbb' : -14, 'Cbb' : -13, 'Gbb' : -12, 'Dbb' : -11, 'Abb' : -10, 'Ebb' : -9, 'Bbb' : -8, 
     'Fb' : -7, 'Cb' : -6, 'Gb' : -5, 'Db' : -4, 'Ab' : -3, 'Eb' : -2, 'Bb' : -1, 
     'F' : 0, 'C' : 1, 'G' : 2, 'D' : 3, 'A' : 4, 'E' : 5, 'B' : 6, 
-    'F#' : 7, 'C#' : 8, 'G#' : 9, 'D#' : 10, 'A#' : 11, 'E#' : 12, 'B#' : 13,
-    'F##' : 14, 'C##' : 15, 'G##' : 16, 'D##' : 17, 'A##' : 18, 'E##' : 19, 'B##' : 20
+    'F#' : 7, 'C#' : 8, 'G#' : 9, 'D#' : 10, 'A#' : 11, 'E#' : 12, 'B#' : 13
+    #'F##' : 14, 'C##' : 15, 'G##' : 16, 'D##' : 17, 'A##' : 18, 'E##' : 19, 'B##' : 20
 }
 
 def step2tpc(step):
@@ -23,39 +23,76 @@ def tpc2step(tpc):
 
 # The (TPC) difference between enharmonic notes
 ENHARMONIC_DIFF = 12
-TPC_MIN = -14
-TPC_MAX = 20
+TPC_MIN = -7
+TPC_MAX = 13
 
-# Mapping between the quality of a chord and a number representation
+# Mapping between the kind of a chord and a number representation
 #
 # This mapping is based off of musicxml <kind> tags which means
-# we can use that to reduce all of the different labels down
+# we can use that to reduce all of the different qualities and extensions down
 # to one string. (ex. m, min, - all reduce to <kind>minor</kind>)
-QUALITY_MAP = {
-    'minor' : 0,
-    'major' : 1,
-    'augmented' : 2,
-    'diminished' : 3
+KIND_MAP =  {
+    'major': 0, 
+    'minor': 1, 
+    'half-diminished': 2, 
+    'diminished': 3, 
+    'augmented': 4, 
+    'major-seventh': 5,
+    'minor-seventh': 6,
+    'dominant': 7, 
+    'major-ninth': 8,
+    'minor-ninth': 9, 
+    'dominant-ninth': 10,
+    'minor-11th': 11, 
+    'dominant-11th': 12,
+    'minor-13th': 13, 
+    'minor-sixth': 14, 
+    'major-13th': 15, 
+    'dominant-13th': 16,
+    'dominant-alt': 17, 
+    'suspended-fourth': 18,
+    'augmented-seventh': 19,
+    'major-sixth': 20, 
+    'major-minor': 21, 
+    'power': 22, 
+    'alt': 23
 }
 
-def quality2int(quality):
-    return QUALITY_MAP[quality]
+def kind2int(kind):
+    return KIND_MAP[kind]
 
-# TODO: Do opposite conversion
+TEXT_MAP = {
+    0: 'major',
+    1: 'minor', 
+    2: 'half-diminished',
+    3: 'diminished',
+    4: 'augmented',
+    5: 'major-seventh', 
+    6: 'minor-seventh', 
+    7: 'dominant',
+    8: 'major-ninth', 
+    9: 'minor-ninth', 
+    10: 'dominant-ninth',
+    11: 'minor-11th',
+    12: 'dominant-11th',
+    13: 'minor-13th',
+    14: 'minor-sixth',
+    15: 'major-13th',
+    16: 'dominant-13th',
+    17: 'dominant-alt',
+    18: 'suspended-fourth',
+    19: 'augmented-seventh',
+    20: 'major-sixth',
+    21: 'major-minor',
+    22: 'power',
+    23: 'alt'
+}
 
-def int2quality(num):
-    pass
+def int2text(num):
+    return TEXT_MAP[num]
 
 def key2step(key):
     return tpc2step(key - 1) # tpc is centered around F while key is centered around C
-
-# Mapping between the extension of a chord and a number representation
-#
-# This mapping is based off of musicxml tags and will be remapped to
-# different numbers to help reduce the number of bits required in the representation
-EXT_MAP = {
-
-}
 
 ALT_MAP = { -2 : 'bb', -1 : 'b', 0 : '', 1 : '#', 2 : '##' }
 
