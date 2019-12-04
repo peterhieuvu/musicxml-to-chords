@@ -6,7 +6,7 @@ ROOT_BITS = 5 # 21
 BASS_BITS = 5 # 21
 KIND_BITS = 5 # 24
 
-NO_CHORD = -1 # Number representing no chord/end of piece
+NO_CHORD = 31 # Number representing no chord/end of piece (this is greater than max mapping for kind)
 
 # Parse and convert chord to integer representation
 # [5 root bits][5 bass bits][5 kind bits]
@@ -29,6 +29,7 @@ def toInt(root, bass, kind):
     out += kindi
 
     return out
+
 
 # Turn int representation back into root, bass, kind, and extension
 # [5 root bits][5 bass bits][5 kind bits]

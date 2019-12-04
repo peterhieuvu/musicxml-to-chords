@@ -87,11 +87,11 @@ def main(dataPath=DATA_PATH, outDir=OUT_DIR):
     print('Processing data in: {}, outputting to: {}\n'.format(readpath, writepath))
     
     # look for .mxl files in the DATA_PATH
-    #files = traverse_directories(dataPath)
-    #print('Found {} files\n'.format(len(files)))
+    files = traverse_directories(dataPath)
+    print('Found {} files\n'.format(len(files)))
 
     # extract the .xml files from the .mxl
-    #extract_xml(files, os.path.join(outDir, 'intermediate/'))
+    extract_xml(files, os.path.join(outDir, 'intermediate/'))
 
     # extract the chord data
     extract_chords(outDir)
